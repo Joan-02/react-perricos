@@ -15,11 +15,26 @@ function App() {
       like: 0,
       dislike: 0,
     },
+    {
+      imgURL:
+        "https://images.unsplash.com/photo-1517849845537-4d257902454a?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTB8fHBlcnJvfGVufDB8fDB8fHww",
+      like: 2,
+      dislike: 3,
+    }
   ]);
+
+  const handleClick = () => {
+    setDogList([...dogList, {
+      imgURL:
+        "https://images.unsplash.com/photo-1517849845537-4d257902454a?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTB8fHBlcnJvfGVufDB8fDB8fHww",
+      like: 2,
+      dislike: 3,
+    }])
+  }
 
   return (
     <>
-      <button>Add perrico</button>
+      <button onClick={handleClick}>Add perrico al final</button>
       <div className="dog-list">
         {dogList.map((dog) => {
           return (
