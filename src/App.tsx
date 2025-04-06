@@ -1,4 +1,4 @@
-import { useState, ChangeEvent } from "react";
+import { useState, ChangeEvent, useEffect } from "react";
 import "./App.css";
 import { getBreeds, getRandomDogImage } from "./services/dog.service";
 
@@ -27,7 +27,7 @@ function App() {
   ]);
 
   const handleClickStart = async () => {
-    const dog = await getRandomDogImage("");
+    const dog = await getRandomDogImage(breed);
     if (dog) {
       setDogList([
         {
@@ -41,7 +41,7 @@ function App() {
   };
 
   const handleClickEnd = async () => {
-    const dog = await getRandomDogImage("");
+    const dog = await getRandomDogImage(breed);
     if (dog) {
       setDogList([
         ...dogList,
@@ -58,12 +58,16 @@ function App() {
     setBreed(event.target.value);
   };
 
-  const fetchAllBreeds = async () => {
-    const breeds = await getBreeds();
-    if (breeds) {
-      setAllBreeds(breeds);
-    }
-  };
+  useEffect(() => {
+    const fetchAllBreeds = async () => {
+      const breeds = await getBreeds();
+      if (breeds) {
+        setAllBreeds(breeds);
+        setBreed(breeds[0]);
+      }
+    };
+    fetchAllBreeds();
+  }, []);
 
   return (
     <>
