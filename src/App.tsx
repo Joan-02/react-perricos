@@ -11,20 +11,7 @@ interface Dog {
 function App() {
   const [breed, setBreed] = useState("");
   const [allBreeds, setAllBreeds] = useState<string[]>([]);
-  const [dogList, setDogList] = useState<Dog[]>([
-    {
-      imgURL:
-        "https://images.unsplash.com/photo-1517849845537-4d257902454a?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTB8fHBlcnJvfGVufDB8fDB8fHww",
-      like: 0,
-      dislike: 0,
-    },
-    {
-      imgURL:
-        "https://images.unsplash.com/photo-1517849845537-4d257902454a?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTB8fHBlcnJvfGVufDB8fDB8fHww",
-      like: 2,
-      dislike: 3,
-    },
-  ]);
+  const [dogList, setDogList] = useState<Dog[]>([]);
 
   const handleClickStart = async () => {
     const dog = await getRandomDogImage(breed);
@@ -71,16 +58,20 @@ function App() {
 
   return (
     <>
-      <div className="breed-picker">
-        Selecciona la raza de perro que quieres añadir
-        <select value={breed} onChange={handleBreedChange}>
-          {allBreeds.map((breed) => {
-            return <option value={breed}>{breed}</option>;
-          })}
-        </select>
+      <div className="header">
+        <div className="breed-picker">
+          Selecciona la raza de perro que quieres añadir
+          <select value={breed} onChange={handleBreedChange}>
+            {allBreeds.map((breed) => {
+              return <option value={breed}>{breed}</option>;
+            })}
+          </select>
+        </div>
+        <div className="buttons">
+          <button onClick={handleClickStart}>Add perrico al principio</button>
+          <button onClick={handleClickEnd}>Add perrico al final</button>
+        </div>
       </div>
-      <button onClick={handleClickStart}>Add perrico al principio</button>
-      <button onClick={handleClickEnd}>Add perrico al final</button>
       <div className="dog-list">
         {dogList.map((dog) => {
           return (
